@@ -2,6 +2,7 @@
 using OpenQA.Selenium.Support.PageObjects;
 using Unit.Test2.Helper;
 using OpenQA.Selenium.Support.UI;
+using System;
 
 namespace Unit.Test2.PageObjects
 {
@@ -17,10 +18,10 @@ namespace Unit.Test2.PageObjects
         [FindsBy(How = How.XPath, Using = "//a[contains(text(),'Add to cart')]")]
         private IWebElement _AddToCart;
 
-        [FindsBy(How = How.Name, Using = "Colour")]
+        [FindsBy(How = How.Id, Using = "msku-sel-1")]
         private IWebElement _Color;
 
-        [FindsBy(How = How.Name, Using = "Storage Capacity")]
+        [FindsBy(How = How.Id, Using = "msku-sel-2")]
         private IWebElement _Storage;
 
         [FindsBy(How = How.Name, Using = "iPhone Protection Pack")]
@@ -61,9 +62,15 @@ namespace Unit.Test2.PageObjects
             SelectElement storage = new SelectElement(_Storage);
             storage.SelectByValue("5");
 
-            SelectElement protection = new SelectElement(_ProtectionPack);
-            protection.SelectByValue("7");
-
+            try
+            {
+                SelectElement protection = new SelectElement(_ProtectionPack);
+                protection.SelectByValue("7");
+            }
+            catch (NoSuchElementException e)
+            {
+                Console.WriteLine("Protection package not visible");
+            }
             _AddToCart.Click();
 
             _driver.WaitForElement(_NoThanksBtn);
