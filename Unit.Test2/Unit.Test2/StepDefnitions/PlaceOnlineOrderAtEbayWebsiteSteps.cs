@@ -4,6 +4,7 @@ using System;
 using TechTalk.SpecFlow;
 using Unit.Test2.PageObjects;
 using NUnit.Framework;
+using System.Configuration;
 
 namespace Unit.Test2
 {
@@ -19,7 +20,8 @@ namespace Unit.Test2
         {
 
             _driver = (IWebDriver)ScenarioContext.Current["driver"];
-            _driver.Url =(string) ScenarioContext.Current["url"];
+            _driver.Url = ConfigurationManager.AppSettings["EbayUrl"];
+            //(string) ScenarioContext.Current["url"];
             _driver.Manage().Window.Maximize();
             ebayHome = new EbayHomePage(_driver);
         }
@@ -42,7 +44,6 @@ namespace Unit.Test2
         [When(@"user selects ""(.*)"" preferences and add to cart")]
         public void WhenuserSelectsPreferencesAndAddToCart(string p0)
         {
-            // ScenarioContext.Current.Pending();
             ebayItemDetails = new EbayItemDetails(_driver);
             if (p0.Trim().Equals("IPhone", StringComparison.InvariantCultureIgnoreCase))
             {

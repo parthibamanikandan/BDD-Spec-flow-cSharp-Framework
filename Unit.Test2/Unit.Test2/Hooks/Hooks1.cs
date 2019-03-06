@@ -19,7 +19,6 @@ namespace Unit.Test2.Hooks
         [BeforeScenario]
         public void BeforeScenario()
         {
-            ScenarioContext.Current["url"] = ConfigurationManager.AppSettings["EbayUrl"];
             _driver = new ChromeDriver();
            // _driver.Url = "https://www.ebay.com.au/";
             _driver.Manage().Window.Maximize();

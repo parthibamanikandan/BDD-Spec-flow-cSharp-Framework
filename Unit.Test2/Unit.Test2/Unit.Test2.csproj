@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="15.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="..\packages\SpecRun.Runner.1.8.5\build\SpecRun.Runner.props" Condition="Exists('..\packages\SpecRun.Runner.1.8.5\build\SpecRun.Runner.props')" />
   <Import Project="..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props" Condition="Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" />
   <Import Project="..\packages\NUnit.3.11.0\build\NUnit.props" Condition="Exists('..\packages\NUnit.3.11.0\build\NUnit.props')" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
@@ -53,6 +54,7 @@
     <Reference Include="System.ValueTuple, Version=4.0.1.0, Culture=neutral, PublicKeyToken=cc7b13ffcd2ddd51, processorArchitecture=MSIL">
       <HintPath>..\packages\System.ValueTuple.4.3.0\lib\netstandard1.0\System.ValueTuple.dll</HintPath>
     </Reference>
+    <Reference Include="System.Web.Extensions" />
     <Reference Include="TechTalk.SpecFlow, Version=2.4.0.0, Culture=neutral, PublicKeyToken=0778194805d6db41, processorArchitecture=MSIL">
       <HintPath>..\packages\SpecFlow.2.4.1\lib\net45\TechTalk.SpecFlow.dll</HintPath>
     </Reference>
@@ -64,25 +66,42 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Helper\Helper.cs" />
-    <Compile Include="Hooks\Hooks1.cs" />
-    <Compile Include="PageObjects\EbayItemDetails.cs" />
-    <Compile Include="PageObjects\EbayHomePage.cs" />
-    <Compile Include="StepDefnitions\PlaceOnlineOrderAtEbayWebsiteSteps.cs" />
     <Compile Include="Features\EbaySpecFlow.feature.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>EbaySpecFlow.feature</DependentUpon>
     </Compile>
+    <Compile Include="Features\PhpTravelsSpecFlow.feature.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>PhpTravelsSpecFlow.feature</DependentUpon>
+    </Compile>
+    <Compile Include="Helper\Helper.cs" />
+    <Compile Include="Hooks\Hooks1.cs" />
+    <Compile Include="PageObjects\PhpHotelPage.cs" />
+    <Compile Include="PageObjects\PhpMyAccountPage.cs" />
+    <Compile Include="PageObjects\EbayItemDetails.cs" />
+    <Compile Include="PageObjects\EbayHomePage.cs" />
+    <Compile Include="PageObjects\PhpHomePage.cs" />
+    <Compile Include="StepDefnitions\AsDemoUserToPHPTravelSiteSteps.cs" />
+    <Compile Include="StepDefnitions\PlaceOnlineOrderAtEbayWebsiteSteps.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Default.srprofile" />
     <None Include="Features\EbaySpecFlow.feature">
       <Generator>SpecFlowSingleFileGenerator</Generator>
       <LastGenOutput>EbaySpecFlow.feature.cs</LastGenOutput>
     </None>
+    <None Include="Features\PhpTravelsSpecFlow.feature">
+      <Generator>SpecFlowSingleFileGenerator</Generator>
+      <LastGenOutput>PhpTravelsSpecFlow.feature.cs</LastGenOutput>
+    </None>
     <None Include="packages.config" />
+    <None Include="runtests.cmd" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Connected Services\" />
@@ -98,7 +117,10 @@
     <Error Condition="!Exists('..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\NUnit3TestAdapter.3.13.0\build\net35\NUnit3TestAdapter.props'))" />
     <Error Condition="!Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecFlow.2.4.1\build\SpecFlow.targets'))" />
     <Error Condition="!Exists('..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets'))" />
+    <Error Condition="!Exists('..\packages\SpecRun.Runner.1.8.5\build\SpecRun.Runner.props')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecRun.Runner.1.8.5\build\SpecRun.Runner.props'))" />
+    <Error Condition="!Exists('..\packages\SpecRun.SpecFlow.2-4-0.1.8.5\build\SpecRun.SpecFlow.2-4-0.targets')" Text="$([System.String]::Format('$(ErrorText)', '..\packages\SpecRun.SpecFlow.2-4-0.1.8.5\build\SpecRun.SpecFlow.2-4-0.targets'))" />
   </Target>
   <Import Project="..\packages\SpecFlow.2.4.1\build\SpecFlow.targets" Condition="Exists('..\packages\SpecFlow.2.4.1\build\SpecFlow.targets')" />
   <Import Project="..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets" Condition="Exists('..\packages\Selenium.Chrome.WebDriver.2.45\build\Selenium.Chrome.WebDriver.targets')" />
+  <Import Project="..\packages\SpecRun.SpecFlow.2-4-0.1.8.5\build\SpecRun.SpecFlow.2-4-0.targets" Condition="Exists('..\packages\SpecRun.SpecFlow.2-4-0.1.8.5\build\SpecRun.SpecFlow.2-4-0.targets')" />
 </Project>
